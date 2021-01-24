@@ -1,4 +1,4 @@
-<mxfile modified="2021-01-24T04:12:35.094Z" host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="7IxgcvWROU8Aj6Kv6MWD" version="14.2.7" type="github">
+<mxfile modified="2021-01-24T04:18:27.074Z" host="app.diagrams.net" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="YUtElrEbKnjThZcKoepT" version="14.2.7" type="github">
   <diagram id="l8hXMBHkgcEJcSW0mbfh" name="Page-1">
     <mxGraphModel dx="1301" dy="753" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
       <root>
@@ -16,7 +16,7 @@
         <mxCell id="c566kchRVXLOq-2EIQAN-9" value="" style="group" vertex="1" connectable="0" parent="1">
           <mxGeometry x="162" y="700" width="128" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="c566kchRVXLOq-2EIQAN-2" value="Arduino Nano 33 not" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.arduino;fillColor=#36868D;strokeColor=none" vertex="1" parent="c566kchRVXLOq-2EIQAN-9">
+        <mxCell id="c566kchRVXLOq-2EIQAN-2" value="Arduino Nano 33 iot&lt;br&gt;&lt;br&gt;Max 3232 RS-232 to TTL serial port modules" style="dashed=0;outlineConnect=0;html=1;align=center;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.weblogos.arduino;fillColor=#36868D;strokeColor=none" vertex="1" parent="c566kchRVXLOq-2EIQAN-9">
           <mxGeometry x="31" y="128" width="67.4" height="32" as="geometry" />
         </mxCell>
         <mxCell id="c566kchRVXLOq-2EIQAN-3" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn2.iconfinder.com/data/icons/electronic-13/480/3-electronic-arduino-chipset-icon-2-128.png" vertex="1" parent="c566kchRVXLOq-2EIQAN-9">
