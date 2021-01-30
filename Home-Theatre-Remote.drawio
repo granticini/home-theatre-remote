@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-30T23:47:49.308Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="v2OzjnGVtGrvlzwbaiyb" version="14.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-30T23:48:44.339Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="XM5BslozvzR2lLKVOta1" version="14.2.7" type="github">
   <diagram name="Page-1" id="7e0a89b8-554c-2b80-1dc8-d5c74ca68de4">
     <mxGraphModel dx="1301" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="#ffffff" math="0" shadow="0">
       <root>
@@ -8,7 +8,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="1cb643a89b7d889d-7" value="240 V .. 12 V DC&lt;br&gt;Power Adapter" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;fillColor=#000000;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.electrical.miscellaneous.monocell_battery;rounded=1;comic=0;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;flipH=1;" parent="1" vertex="1">
-          <mxGeometry x="30.999999999999986" y="75" width="100" height="60" as="geometry" />
+          <mxGeometry x="30.999999999999986" y="102.5" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-2" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn4.iconfinder.com/data/icons/johaupt_free_icons_01/com_plug01.png" vertex="1" parent="1">
           <mxGeometry x="210" y="270" width="57.1" height="57.1" as="geometry" />
