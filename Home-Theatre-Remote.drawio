@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-01-31T05:17:15.632Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="46pNe5kUrCdhAJVNnHnn" version="14.2.9" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-31T05:38:50.623Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15" etag="Cq_o6tJ3TgJzrpBK6jkp" version="14.2.9" type="github">
   <diagram name="Page-1" id="7e0a89b8-554c-2b80-1dc8-d5c74ca68de4">
-    <mxGraphModel dx="936" dy="552" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
+    <mxGraphModel dx="905" dy="502" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -221,11 +221,11 @@
         <mxCell id="ENBSYhny3J92JrBctLqS-77" value="Patch Panel" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
           <mxGeometry x="173.29999999999998" y="488.75" width="74.9" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="ENBSYhny3J92JrBctLqS-82" value="Pins 2, 3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="217.10000000000002" y="76.88" width="50" height="20" as="geometry" />
+        <mxCell id="ENBSYhny3J92JrBctLqS-82" value="Pins 8, 9" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="217.10000000000002" y="75.94" width="50" height="25" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-83" value="Pins 10, 11" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="285.4" y="76.88" width="70" height="20" as="geometry" />
+          <mxGeometry x="291.7" y="76.88" width="70" height="20" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-93" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="560" y="360" width="200" height="190" as="geometry" />
@@ -242,7 +242,7 @@
         <mxCell id="ENBSYhny3J92JrBctLqS-95" value="" style="rounded=1;whiteSpace=wrap;html=1;align=left;" parent="ENBSYhny3J92JrBctLqS-94" vertex="1">
           <mxGeometry width="209.00000000000003" height="260" as="geometry" />
         </mxCell>
-        <mxCell id="ENBSYhny3J92JrBctLqS-96" value="&lt;div&gt;&lt;b&gt;Arduino I/O PIN Mappings&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;0 -------------&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;1 -------------&amp;nbsp;&lt;br&gt;&lt;/div&gt;&lt;div&gt;2 ------------- RX (A/V Recever)&lt;/div&gt;&lt;div&gt;3 ------------- TX (A/V Receiver)&lt;/div&gt;&lt;div&gt;&lt;div&gt;4 ------------- RX (Projector)&lt;/div&gt;&lt;div&gt;5 ------------- TX (Projector)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;6 ------------- On (AV/ Receiver)&lt;br&gt;&lt;/div&gt;&lt;div&gt;7 ------------- Off&lt;/div&gt;8 ------------- Apple TV&lt;br&gt;&lt;div&gt;&lt;div&gt;9 ------------- Playstation&lt;/div&gt;&lt;div&gt;10 ----------- Radio&lt;/div&gt;&lt;div&gt;11 ----------- TV&lt;/div&gt;&lt;div&gt;12 ----------- On (Projector)&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;14 ----------- Off (Projector)&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBorderColor=none;" parent="ENBSYhny3J92JrBctLqS-94" vertex="1">
+        <mxCell id="ENBSYhny3J92JrBctLqS-96" value="&lt;div&gt;&lt;b&gt;Arduino I/O PIN Mappings&lt;/b&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;0 -------------&amp;nbsp;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;1 -------------&amp;nbsp;&lt;/div&gt;&lt;div&gt;2 ------------- On (AV/ Receiver)&lt;br&gt;&lt;/div&gt;&lt;div&gt;3 ------------- Off&lt;/div&gt;4 ------------- Apple TV&lt;br&gt;&lt;div&gt;&lt;div&gt;5 ------------- Playstation&lt;/div&gt;&lt;div&gt;6 ------------- Radio&lt;/div&gt;&lt;div&gt;7 ------------- TV&lt;/div&gt;&lt;div&gt;8 ------------- RX (A/V Receiver)&lt;/div&gt;&lt;div&gt;9 ------------- TX (A/V Receiver)&lt;/div&gt;&lt;div&gt;&lt;div&gt;10 ----------- RX (Projector)&lt;/div&gt;&lt;/div&gt;&lt;div&gt;11 ----------- TX (Projector)&amp;nbsp;&lt;/div&gt;&lt;div&gt;12 ----------- On (Projector)&lt;/div&gt;&lt;div&gt;13 ----------- Built-in LED&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;div&gt;&lt;div&gt;14 ----------- Off (Projector)&lt;/div&gt;&lt;div&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBorderColor=none;" parent="ENBSYhny3J92JrBctLqS-94" vertex="1">
           <mxGeometry x="11" y="10.4" width="209" height="239.6" as="geometry" />
         </mxCell>
       </root>
