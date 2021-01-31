@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-01-31T00:02:55.434Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="YYiz4F9Kk1Zj7VacpZ7g" version="14.2.7" type="github">
+<mxfile host="app.diagrams.net" modified="2021-01-31T02:26:01.715Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.2 Safari/605.1.15" etag="dNG15HGdO-NbTm85Njl8" version="14.2.7" type="github">
   <diagram name="Page-1" id="7e0a89b8-554c-2b80-1dc8-d5c74ca68de4">
     <mxGraphModel dx="1301" dy="787" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#ffffff" math="0" shadow="0">
       <root>
@@ -11,7 +11,7 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="1cb643a89b7d889d-7" value="240 V .. 12 V DC&lt;br&gt;Power Adapter" style="verticalLabelPosition=bottom;shadow=0;dashed=0;align=center;fillColor=#000000;html=1;verticalAlign=top;strokeWidth=1;shape=mxgraph.electrical.miscellaneous.monocell_battery;rounded=1;comic=0;labelBackgroundColor=none;fontFamily=Verdana;fontSize=12;flipH=1;" parent="1" vertex="1">
-          <mxGeometry x="30.999999999999986" y="102.5" width="100" height="60" as="geometry" />
+          <mxGeometry x="39.999999999999986" y="95" width="100" height="60" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-2" value="" style="shape=image;html=1;verticalAlign=top;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;imageAspect=0;aspect=fixed;image=https://cdn4.iconfinder.com/data/icons/johaupt_free_icons_01/com_plug01.png" vertex="1" parent="1">
           <mxGeometry x="210" y="270" width="57.1" height="57.1" as="geometry" />
@@ -123,13 +123,13 @@
           <mxGeometry x="380" y="50.559999999999995" width="55.5" height="16.88" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-39" value="Off" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#666666;align=center;strokeColor=#4D4D4D;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="450" y="50.56" width="55.5" height="16.88" as="geometry" />
+          <mxGeometry x="381.45" y="80" width="55.5" height="16.88" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-40" value="Off" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#666666;align=center;strokeColor=#4D4D4D;fontColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="450" y="80" width="55.5" height="16.88" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-41" value="On" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#666666;align=center;strokeColor=#4D4D4D;fontColor=#ffffff;" vertex="1" parent="1">
-          <mxGeometry x="380" y="80" width="55.5" height="16.88" as="geometry" />
+          <mxGeometry x="450" y="50.56" width="55.5" height="16.88" as="geometry" />
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-42" value="PS4" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#666666;align=center;strokeColor=#4D4D4D;fontColor=#ffffff;" vertex="1" parent="1">
           <mxGeometry x="450" y="110" width="55.5" height="16.88" as="geometry" />
@@ -232,6 +232,9 @@
         </mxCell>
         <mxCell id="ENBSYhny3J92JrBctLqS-83" value="Pins 10, 11" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="285.4" y="76.88" width="70" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ENBSYhny3J92JrBctLqS-91" value="button" style="rounded=1;html=1;shadow=0;dashed=0;whiteSpace=wrap;fontSize=10;fillColor=#666666;align=center;strokeColor=#4D4D4D;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="40" y="403.12" width="55.5" height="16.88" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
