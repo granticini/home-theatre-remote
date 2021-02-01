@@ -3,7 +3,6 @@
   Grant Phillips
   23 January 2021
   -------------------------
-
   Control my Pioneer A/V Amplifier and Panasonic Projector
   using RS-232 connections on both devices.
   
@@ -18,7 +17,6 @@
  * Button Playstation is digital pin 5
  * Button Radio is digital pin 6
  * Button TV is digital pin 7
-
  * Panasonic Projector
  * -----------
  * RX is digital pin 10 (connect to TX of other device)
@@ -71,7 +69,7 @@ bool ledState = false;
 #define AMP_PIN_BUTTON_OFF 3
 #define AMP_PIN_BUTTON_APPLE_TV 4
 #define AMP_PIN_BUTTON_PLAYSTATION 5 
-#define AMP_PIN_BUTTON_RADIO 6
+#define AMP_PIN_BUTTON_TUNER 6
 #define AMP_PIN_BUTTON_TV 7
  
 #define PROJECTOR_BAUD 9600
@@ -112,23 +110,23 @@ byte AMP_COMMAND_VOLUME_SET_MINIMUM[]    = {'0', '0', '1', 'V', 'L', BYTE_CR};
 byte AMP_COMMAND_VOLUME_SET_MUTE[]       = {'0', '0', '0', 'V', 'L', BYTE_CR};
 
 byte AMP_COMMAND_FUNCTION_MODE_SET[] = {'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_PLAYSTATION[] = {'0', '4', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_APPLE_TV[]    = {'2', '5', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_PHONO[]       = {'0', '0', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_CD[]          = {'0', '1', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_TUNER[]       = {'0', '2', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_CDR[]         = {'0', '3', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_DVD[]         = {'0', '4', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_TV[]          = {'0', '5', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_VIDEO1[]      = {'1', '0', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_VIDEO2[]      = {'1', '4', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_VIDEO3[]      = {'3', '2', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_DVR1[]        = {'1', '5', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_DVR2[]        = {'1', '6', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_HDMI1[]       = {'1', '9', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_HDMI2[]       = {'2', '0', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_HDMI3[]       = {'2', '1', 'F', 'N', BYTE_CR};
-byte AMP_FUNCTION_MODE_BDP[]         = {'2', '5', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_PLAYSTATION[] = {'0', '4', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_APPLE_TV[]    = {'2', '5', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_PHONO[]       = {'0', '0', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_CD[]          = {'0', '1', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_TUNER[]       = {'0', '2', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_CDR[]         = {'0', '3', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_DVD[]         = {'0', '4', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_TV[]          = {'0', '5', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_VIDEO1[]      = {'1', '0', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_VIDEO2[]      = {'1', '4', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_VIDEO3[]      = {'3', '2', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_DVR1[]        = {'1', '5', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_DVR2[]        = {'1', '6', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_HDMI1[]       = {'1', '9', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_HDMI2[]       = {'2', '0', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_HDMI3[]       = {'2', '1', 'F', 'N', BYTE_CR};
+byte AMP_COMMAND_FUNCTION_MODE_BDP[]         = {'2', '5', 'F', 'N', BYTE_CR};
 
 int AMP_DELAY_AFTER_POWER_ON = 100;
 
@@ -212,6 +210,7 @@ void setupSerialAmp()
   // ampSerial.begin(AMP_BAUD);
   
   DBG("Serial connection to Amp completed.");
+  DBG();
 }
 
 void setupSerialProjector()
@@ -224,8 +223,8 @@ void setupSerialProjector()
   
   // projectorSerial.begin(PROJECTOR_BAUD);
 
-  DBG();
   DBG("Serial connection to Projector completed.");
+  DBG();
 }
 
 void setupLEDs()
@@ -233,9 +232,9 @@ void setupLEDs()
   DBG("Setting up LEDs ...");
   pinMode(LED_BUILTIN, OUTPUT);
   
-//  digitalWrite(LED_BUILTIN, HIGH);
+//  digitalWrite(LED_BUILTIN, ON);
 //  delay(100);
-//  digitalWrite(LED_BUILTIN, LOW);
+//  digitalWrite(LED_BUILTIN, OFF);
 
   DBG("LED setup completed ok");
 }
@@ -258,7 +257,7 @@ void setupButtons()
   pinMode(AMP_PIN_BUTTON_OFF,         INPUT_PULLUP);
   pinMode(AMP_PIN_BUTTON_APPLE_TV,    INPUT_PULLUP);
   pinMode(AMP_PIN_BUTTON_PLAYSTATION, INPUT_PULLUP);
-  pinMode(AMP_PIN_BUTTON_RADIO,       INPUT_PULLUP);
+  pinMode(AMP_PIN_BUTTON_TUNER,       INPUT_PULLUP);
   pinMode(AMP_PIN_BUTTON_TV,          INPUT_PULLUP);
 
   pinMode(PROJECTOR_PIN_BUTTON_ON,    INPUT_PULLUP);
@@ -267,7 +266,7 @@ void setupButtons()
   DBG("Buttons setup ok");
 }
 
-bool readButtonState(int buttonPin)
+bool isButtonPressed(int buttonPin)
 {
   bool pressed = false;
   
@@ -340,30 +339,59 @@ void loop() // run over and over
   }
 
   // detect button press
-  if (readButtonState(AMP_PIN_BUTTON_ON))
+  if (isButtonPressed(AMP_PIN_BUTTON_ON))
   {
     DBG("Button Pressed: Amp ON");
     ampSendCommand(AMP_COMMAND_POWER_ON, sizeof(AMP_COMMAND_POWER_ON));
     delay(AMP_DELAY_AFTER_POWER_ON);
     ampSendCommand(AMP_COMMAND_POWER_ON, sizeof(AMP_COMMAND_POWER_ON));
   }
-  else if (readButtonState(AMP_PIN_BUTTON_OFF))
+  else if (isButtonPressed(AMP_PIN_BUTTON_OFF))
   {
     DBG("Button Pressed: Amp OFF");
     ampSendCommand(AMP_COMMAND_POWER_OFF, sizeof(AMP_COMMAND_POWER_OFF));
   }
+  else if (isButtonPressed(AMP_PIN_BUTTON_APPLE_TV))
+  {
+    DBG("Button Pressed: Apple TV");
+    ampSendCommand(AMP_COMMAND_FUNCTION_MODE_APPLE_TV, sizeof(AMP_COMMAND_FUNCTION_MODE_APPLE_TV));
+  }
+  else if (isButtonPressed(AMP_PIN_BUTTON_PLAYSTATION))
+  {
+    DBG("Button Pressed: Playstation");
+    ampSendCommand(AMP_COMMAND_FUNCTION_MODE_PLAYSTATION, sizeof(AMP_COMMAND_FUNCTION_MODE_PLAYSTATION));
+  }
+  else if (isButtonPressed(AMP_PIN_BUTTON_TUNER))
+  {
+    DBG("Button Pressed: Radio");
+    ampSendCommand(AMP_COMMAND_FUNCTION_MODE_TUNER, sizeof(AMP_COMMAND_FUNCTION_MODE_TUNER));
+  }
+  else if (isButtonPressed(AMP_PIN_BUTTON_TV))
+  {
+    DBG("Button Pressed: TV");
+    ampSendCommand(AMP_COMMAND_FUNCTION_MODE_TV, sizeof(AMP_COMMAND_FUNCTION_MODE_TV));
+  }
+  else if (isButtonPressed(PROJECTOR_PIN_BUTTON_ON))
+  {
+    DBG("Button Pressed: Projector ON");
+    projectorSendCommand(PROJECTOR_COMMAND_POWER_ON, sizeof(PROJECTOR_COMMAND_POWER_ON));
+  }
+  else if (isButtonPressed(PROJECTOR_PIN_BUTTON_OFF))
+  {
+    DBG("Button Pressed: Projector OFF");
+    projectorSendCommand(PROJECTOR_COMMAND_POWER_OFF, sizeof(PROJECTOR_COMMAND_POWER_OFF));
+  }
 
-// probably don't need this
-// if (ampSerial.available())
-// {
-//   receiveBuffer = ampSerial.read();
-// }
-
-
-// if (projectorSerial.available())
-// {
-//   receiveBuffer = projectorSerial.read();
-// }
+  // probably don't need this
+  // if (ampSerial.available())
+  // {
+  //   receiveBuffer = ampSerial.read();
+  // }
+  
+  // if (projectorSerial.available())
+  // {
+  //   receiveBuffer = projectorSerial.read();
+  // }
 
   //DBG("... ", mainloopCounter);
   delay(DELAY_mainloop);
