@@ -10,19 +10,19 @@
  The circuit:
  * Pionner Amp
  * -----------
- * RX is digital pin 2 (connect to TX of other device)
- * TX is digital pin 3 (connect to RX of other device)
- * Button On is digital pin 6
- * Button Off is digital pin 7
- * Button Apple TV is digital pin 8
- * Button Playstation is digital pin 9
- * Button Radio is digital pin 10
- * Button TV is digital pin 11
+ * RX is digital pin 8 (connect to TX of other device)
+ * TX is digital pin 9 (connect to RX of other device)
+ * Button On is digital pin 2
+ * Button Off is digital pin 3
+ * Button Apple TV is digital pin 4
+ * Button Playstation is digital pin 5
+ * Button Radio is digital pin 6
+ * Button TV is digital pin 7
 
  * Panasonic Projector
  * -----------
- * RX is digital pin 4 (connect to TX of other device)
- * TX is digital pin 5 (connect to RX of other device)
+ * RX is digital pin 10 (connect to TX of other device)
+ * TX is digital pin 11 (connect to RX of other device)
  * Button On is digital pin 12
  * Button Off is digital pin 14
  * 
@@ -30,10 +30,9 @@
 // #include <SoftwareSerial.h>
 
 #define APP_NAME     "Home Theatre Remote"
-#define APP_VERSION  "0.0.1"
+#define APP_VERSION  "0.0.2"
 #define APP_AUTHOR   "Grant Phillips"
 #define APP_CREATED  "23 January 2021"
-#define APP_BUILT    "31 January 2021"
 
 #define ON               HIGH
 #define OFF              LOW
