@@ -25,12 +25,14 @@
  * Button Off is digital pin 14
  * 
 */
-// #include <SoftwareSerial.h>
+#include <Arduino.h>
+#include "wiring_private.h"
 
 #define APP_NAME     "Home Theatre Remote"
-#define APP_VERSION  "0.0.2"
+#define APP_VERSION  "0.1.0"
 #define APP_AUTHOR   "Grant Phillips"
 #define APP_CREATED  "23 January 2021"
+#define APP_UPDATED  "07 February 2021"
 
 #define ON               HIGH
 #define OFF              LOW
@@ -138,14 +140,31 @@ unsigned long DELAY_DEBOUNCE = 50;   // the debounce time which user sets prior 
 
 int mainloopCounter = -1;
 
+// AMP Pins 8, 9
+Uart ampSerial (&sercom0, AMP_PIN_RX, AMP_PIN_TX, SERCOM_RX_PAD_8, UART_TX_PAD_9);
+
+// Projector uses 10, 11
+Uart projectorSerial (&sercom1, PROJECTOR_PIN_RX, PROJECTOR_PIN_TX, SERCOM_RX_PAD_10, UART_TX_PAD_11);
+
+// Attach the interrupt handlers to the SERCOM
+void SERCOM0_Handler()
+{
+    ampSerial.IrqHandler();
+}
+
+void SERCOM1_Handler()
+{
+    projectorSerial.IrqHandler();
+}
+
 void projectorSendCommand(byte* command, int len)
 {
-  // projectorSerial.write(command, len);
+  projectorSerial.write(command, len);
 }
 
 void ampSendCommand(byte* command, int len)
 {
-  // ampSerial.write(command, len);
+  ampSerial.write(command, len);
 }
 
 
@@ -207,7 +226,12 @@ void setupSerialAmp()
   DBG("Stop bits ... ", AMP_STOP_BITS);
   DBG("Parity ...... ", AMP_PARITY_BITS);
   
-  // ampSerial.begin(AMP_BAUD);
+  // Assign pins to SERCOM
+  pinPeripheral(AMP_PIN_RX, PIO_SERCOM);
+  pinPeripheral(AMP_PIN_TX, PIO_SERCOM);
+
+  // Start new hardware serial
+  ampSerial.begin(AMP_BAUD);
   
   DBG("Serial connection to Amp completed.");
   DBG();
@@ -220,8 +244,13 @@ void setupSerialProjector()
   DBG("Data bits ... ", PROJECTOR_DATA_BITS);
   DBG("Stop bits ... ", PROJECTOR_STOP_BITS);
   DBG("Parity ...... ", PROJECTOR_PARITY_BITS);
-  
-  // projectorSerial.begin(PROJECTOR_BAUD);
+
+  // Assign pins to SERCOM
+  pinPeripheral(PROJECTOR_PIN_RX, PIO_SERCOM);
+  pinPeripheral(PROJECTOR_PIN_TX, PIO_SERCOM);
+
+  // Start new hardware serial
+  projectorSerial.begin(PROJECTOR_BAUD);
 
   DBG("Serial connection to Projector completed.");
   DBG();
