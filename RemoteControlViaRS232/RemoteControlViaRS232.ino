@@ -9,30 +9,57 @@
  The circuit:
  * Pionner Amp
  * -----------
- * RX is digital pin 8 (connect to TX of other device)
- * TX is digital pin 9 (connect to RX of other device)
- * Button On is digital pin 2
- * Button Off is digital pin 3
- * Button Apple TV is digital pin 4
- * Button Playstation is digital pin 5
- * Button Radio is digital pin 6
- * Button TV is digital pin 7
+ * RX is digital pin                 5
+ * TX is digital pin                 6
+Uart ampSerial (&sercom0, 5, 6, SERCOM_RX_PAD_1, UART_TX_PAD_0);
+void SERCOM0_Handler()
+{
+    ampSerial.IrqHandler();
+}
+void setup()
+{
+  pinPeripheral(5, PIO_SERCOM_ALT);
+  pinPeripheral(6, PIO_SERCOM_ALT);
+
+  ampSerial.begin(9600);
+}
+ * 
+ * Button On is digital pin           2
+ * Button Off is digital pin          3
+ * Button Apple TV is digital pin     4
+ * Button Playstation is digital pin  7
+ * Button Radio is digital pin        9
+ * Button TV is digital pin          10
+ * 
  * Panasonic Projector
- * -----------
- * RX is digital pin 10 (connect to TX of other device)
- * TX is digital pin 11 (connect to RX of other device)
- * Button On is digital pin 12
- * Button Off is digital pin 14
+ * -------------------
+ * RX is digital pin                13
+ * TX is digital pin                 8
+Uart projecterSerial (&sercom1, 13, 8, SERCOM_RX_PAD_1, UART_TX_PAD_2);
+void SERCOM0_Handler()
+{
+    projecterSerial.IrqHandler();
+}
+void setup()
+{
+  pinPeripheral(13, PIO_SERCOM);
+  pinPeripheral( 8, PIO_SERCOM);
+
+  projecterSerial.begin(9600);
+}
+ * 
+ * Button On is digital pin         12
+ * Button Off is digital pin        14
  * 
 */
 #include <Arduino.h>
 #include "wiring_private.h"
 
 #define APP_NAME     "Home Theatre Remote"
-#define APP_VERSION  "0.1.0"
+#define APP_VERSION  "0.2.1"
 #define APP_AUTHOR   "Grant Phillips"
 #define APP_CREATED  "23 January 2021"
-#define APP_UPDATED  "07 February 2021"
+#define APP_UPDATED  "08 February 2021"
 
 #define ON               HIGH
 #define OFF              LOW
@@ -56,45 +83,53 @@ int previousSeconds = -1;
 #define DELAY_SETUP_MAIN_SERIAL     10
 
 #define BAUD_MAIN 115200
-bool DEBUG_ON = true;
+bool DEBUG_ON = false;
 
 bool ledState = false;
 
-#define AMP_BAUD 9600
-#define AMP_DATA_BITS 8
-#define AMP_STOP_BITS 1
+// LED_BUILTIN
+#define PIN_LED         11
+
+#define AMP_BAUD        9600
+#define AMP_DATA_BITS   8
+#define AMP_STOP_BITS   1
 #define AMP_PARITY_BITS 0
 
-#define AMP_PIN_RX 8
-#define AMP_PIN_TX 9
-#define AMP_PIN_BUTTON_ON 2
-#define AMP_PIN_BUTTON_OFF 3
-#define AMP_PIN_BUTTON_APPLE_TV 4
-#define AMP_PIN_BUTTON_PLAYSTATION 5 
-#define AMP_PIN_BUTTON_TUNER 6
-#define AMP_PIN_BUTTON_TV 7
+#define AMP_PIN_RX                 5
+#define AMP_PIN_TX                 6
+
+#define AMP_PIN_BUTTON_ON          2
+#define AMP_PIN_BUTTON_OFF         3
+#define AMP_PIN_BUTTON_APPLE_TV    4
+#define AMP_PIN_BUTTON_PLAYSTATION 7 
+#define AMP_PIN_BUTTON_TUNER       9
+#define AMP_PIN_BUTTON_TV          10
  
-#define PROJECTOR_BAUD 9600
-#define PROJECTOR_DATA_BITS 8
-#define PROJECTOR_STOP_BITS 1
+#define PROJECTOR_BAUD        9600
+#define PROJECTOR_DATA_BITS   8
+#define PROJECTOR_STOP_BITS   1
 #define PROJECTOR_PARITY_BITS 0
 
-#define PROJECTOR_PIN_RX 10
-#define PROJECTOR_PIN_TX 11
-#define PROJECTOR_PIN_BUTTON_ON 12
+#define PROJECTOR_PIN_RX         13
+#define PROJECTOR_PIN_TX          8
+
+#define PROJECTOR_PIN_BUTTON_ON  12
 #define PROJECTOR_PIN_BUTTON_OFF 14
 
-byte BYTE_STX = 0x02;
-byte BYTE_ETX = 0x03;
-byte BYTE_CR  = 0x0D;
-byte BYTE_LF  = 0x0A;
+#define STX 0x02
+#define ETX 0x03
+#define CR  0x0D
+#define LF  0x0A
 
-// SoftwareSerial projectorSerial(PROJECTOR_PIN_RX, PROJECTOR_PIN_TX);
+byte BYTE_STX = STX;
+byte BYTE_ETX = ETX;
+byte BYTE_CR  = CR;
+byte BYTE_LF  = LF;
+
 byte PROJECTOR_COMMAND_POWER_ON[]  = {BYTE_STX, 'P', 'O', 'N', BYTE_ETX};
 byte PROJECTOR_COMMAND_POWER_OFF[] = {BYTE_STX, 'P', 'O', 'F', BYTE_ETX};
 int PROJECTOR_DELAY_AFTER_POWER_ON = 10000;
 
-// SoftwareSerial ampSerial(AMP_PIN_RX, AMP_PIN_TX);
 byte AMP_COMMAND_POWER_ON[]    = {'P', 'O', BYTE_CR};
 byte AMP_COMMAND_POWER_OFF[]   = {'P', 'F', BYTE_CR};
 byte AMP_COMMAND_VOLUME_UP[]   = {'V', 'U', BYTE_CR};
@@ -140,46 +175,77 @@ unsigned long DELAY_DEBOUNCE = 50;   // the debounce time which user sets prior 
 
 int mainloopCounter = -1;
 
-// AMP Pins 8, 9
-Uart ampSerial (&sercom0, AMP_PIN_RX, AMP_PIN_TX, SERCOM_RX_PAD_8, UART_TX_PAD_9);
+// AMP
+// Pins RX=5, TX=6
+// 9600 baud, 1 Stop bit, No Parity
+// SERCOM_STOP_BIT_1
+Uart ampSerial (&sercom2, AMP_PIN_RX, AMP_PIN_TX, SERCOM_RX_PAD_1, UART_TX_PAD_0);
 
-// Projector uses 10, 11
-Uart projectorSerial (&sercom1, PROJECTOR_PIN_RX, PROJECTOR_PIN_TX, SERCOM_RX_PAD_10, UART_TX_PAD_11);
+// Projector 
+// Pins RX=13, TX=8
+// 9600 baud, 1 Stop bit, No Parity
+// SERCOM_STOP_BIT_1
+Uart projectorSerial (&sercom1, PROJECTOR_PIN_RX, PROJECTOR_PIN_TX, SERCOM_RX_PAD_1, UART_TX_PAD_2);
 
 // Attach the interrupt handlers to the SERCOM
 void SERCOM0_Handler()
 {
     ampSerial.IrqHandler();
 }
-
 void SERCOM1_Handler()
 {
     projectorSerial.IrqHandler();
 }
 
+void DBG_Bytes(byte* bytes, int len)
+{
+  if (!DEBUG_ON) return;
+  for (int i=0; i<len; i++)
+  {
+    if (i > 0) Serial.print(" ");
+    byte byt = bytes[i];
+    switch (byt)
+    {
+      case 0:   Serial.print( "NUL" ); break;
+      case STX: Serial.print( "STX" ); break;
+      case ETX: Serial.print( "ETX" ); break;
+      case CR:  Serial.print( "CR" ); break;
+      case LF:  Serial.print( "LF" ); break;
+      default:  Serial.print((char)byt);
+    }
+  }
+  Serial.println();  
+}
+
 void projectorSendCommand(byte* command, int len)
 {
+  DBG("projectorSendCommand()");
+  DBG_Bytes(command, len);
+  blinkLed(5);
   projectorSerial.write(command, len);
 }
 
 void ampSendCommand(byte* command, int len)
 {
+  DBG("ampSendCommand()");
+  DBG_Bytes(command, len);
+  blinkLed(5);
   ampSerial.write(command, len);
 }
 
-
 void setup()
 {
-  DEBUG_ON = false;
-
-  // Open serial communications and wait for port to open:
-  Serial.begin(BAUD_MAIN);
-  while (!Serial)
+  if (DEBUG_ON)
   {
-    // wait for serial port to connect. Needed for Native USB only
-    delay(DELAY_SETUP_MAIN_SERIAL);
+    // Open serial communications and wait for port to open:
+    Serial.begin(BAUD_MAIN);
+    while (!Serial)
+    {
+      // wait for serial port to connect. Needed for Native USB only
+      delay(DELAY_SETUP_MAIN_SERIAL);
+    }
   }
-  DEBUG_ON = true;
+  
   DBG("******");
   DBG("setup()");
 
@@ -196,9 +262,9 @@ void setup()
   DBG("Success - startup complete.");
   DBG("===========================");
 
-//  digitalWrite(LED_BUILTIN, HIGH);
-//  delay(500);
-//  digitalWrite(LED_BUILTIN, LOW);
+  digitalWrite(PIN_LED, HIGH);
+  delay(500);
+  digitalWrite(PIN_LED, LOW);
 }
 
 // Called last from the variadic template function
@@ -216,7 +282,6 @@ void DBG(T first, Types... other)
   DBG(other...);
 }
 
-
 void setupSerialAmp()
 {
   // setup the amp and projector the serial comms
@@ -225,12 +290,15 @@ void setupSerialAmp()
   DBG("Data bits ... ", AMP_DATA_BITS);
   DBG("Stop bits ... ", AMP_STOP_BITS);
   DBG("Parity ...... ", AMP_PARITY_BITS);
-  
+
   // Assign pins to SERCOM
-  pinPeripheral(AMP_PIN_RX, PIO_SERCOM);
-  pinPeripheral(AMP_PIN_TX, PIO_SERCOM);
+  DBG("pinPeripheral(", AMP_PIN_RX, ", PIO_SERCOM_ALT)");
+  pinPeripheral(AMP_PIN_RX, PIO_SERCOM_ALT);
+  DBG("pinPeripheral(", AMP_PIN_TX, ", PIO_SERCOM_ALT)");
+  pinPeripheral(AMP_PIN_TX, PIO_SERCOM_ALT);
 
   // Start new hardware serial
+  DBG("ampSerial.begin(", AMP_BAUD, ")");
   ampSerial.begin(AMP_BAUD);
   
   DBG("Serial connection to Amp completed.");
@@ -246,10 +314,13 @@ void setupSerialProjector()
   DBG("Parity ...... ", PROJECTOR_PARITY_BITS);
 
   // Assign pins to SERCOM
+  DBG("pinPeripheral(", PROJECTOR_PIN_RX, ", PIO_SERCOM)");
   pinPeripheral(PROJECTOR_PIN_RX, PIO_SERCOM);
+  DBG("pinPeripheral(", PROJECTOR_PIN_TX, ", PIO_SERCOM)");
   pinPeripheral(PROJECTOR_PIN_TX, PIO_SERCOM);
 
   // Start new hardware serial
+  DBG("projectorSerial.begin(", PROJECTOR_BAUD, ")");
   projectorSerial.begin(PROJECTOR_BAUD);
 
   DBG("Serial connection to Projector completed.");
@@ -259,12 +330,10 @@ void setupSerialProjector()
 void setupLEDs()
 {
   DBG("Setting up LEDs ...");
-  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(PIN_LED, OUTPUT);
   
-//  digitalWrite(LED_BUILTIN, ON);
-//  delay(100);
-//  digitalWrite(LED_BUILTIN, OFF);
-
+  blinkLed(5);
+ 
   DBG("LED setup completed ok");
 }
 
@@ -274,8 +343,7 @@ void setupButtons()
 
   // initialise the array that tracks the Button states
   unsigned long currentTime = millis();
-  int pin;
-  for (pin = 0; pin < MAX_PIN; pin++)
+  for (int pin = 0; pin < MAX_PIN; pin++)
   {
     lastButtonStates[pin]  = BUTTON_UP;
     buttonStates[pin]      = BUTTON_UP;
@@ -343,6 +411,19 @@ bool isButtonPressed(int buttonPin)
   return pressed;
 }
 
+void blinkLed(int numberOfBlinks)
+{
+  const int DELAY_BLINK = 100;
+
+  for(int x=0; x < numberOfBlinks; x++)
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+    delay(DELAY_BLINK);
+    digitalWrite(LED_BUILTIN, LOW);
+    delay(DELAY_BLINK);
+  }
+}
+
 void loop() // run over and over
 {
   unsigned long currentTime = millis();
@@ -361,11 +442,11 @@ void loop() // run over and over
   }
   
   mainloopCounter += 1;
-  if (DEBUG_ON && mainloopCounter > 10000)
-  {
-    DBG("Turning off DEBUG mode!");
-    DEBUG_ON = false;
-  }
+  //if (DEBUG_ON && mainloopCounter > 10000)
+ // {
+ //   DBG("Turning off DEBUG mode!");
+ //   DEBUG_ON = false;
+ // }
 
   // detect button press
   if (isButtonPressed(AMP_PIN_BUTTON_ON))
@@ -411,17 +492,33 @@ void loop() // run over and over
     projectorSendCommand(PROJECTOR_COMMAND_POWER_OFF, sizeof(PROJECTOR_COMMAND_POWER_OFF));
   }
 
-  // probably don't need this
-  // if (ampSerial.available())
-  // {
-  //   receiveBuffer = ampSerial.read();
-  // }
-  
-  // if (projectorSerial.available())
-  // {
-  //   receiveBuffer = projectorSerial.read();
-  // }
 
-  //DBG("... ", mainloopCounter);
+  if (ampSerial.available()) 
+  {
+    DBG("Reading data from Amp...");
+    while (ampSerial.available()) 
+    {
+      Serial.print(ampSerial.read());
+    }
+    Serial.println();
+  }
+  
+  if (projectorSerial.available()) 
+  {
+    DBG("Reading data from Projector...");
+    while (projectorSerial.available()) 
+    {
+      Serial.print(projectorSerial.read());
+    }
+  }
+
+  DBG("... ", mainloopCounter);
+
+  if (mainloopCounter % 100 == 0)
+  {
+    ledState = !ledState;
+    digitalWrite(PIN_LED, ledState ? HIGH : LOW);
+  }
+
   delay(DELAY_mainloop);
 }
